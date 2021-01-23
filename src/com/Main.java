@@ -1,5 +1,10 @@
 package com;
-import com.mvc.Display;
+import com.model.Stock;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
 
 public class Main {
 
@@ -7,7 +12,9 @@ public class Main {
 
         System.out.println("Hello World!");
 
-        Display display = new Display();
+
+
+        //Display display = new Display();
 
     }
 }
