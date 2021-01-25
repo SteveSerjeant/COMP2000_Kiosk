@@ -1,5 +1,6 @@
 package com;
 import com.model.Stock;
+import com.controller.systemController;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,10 +12,10 @@ public class Main {
     public static void main (String[] args){
 
         System.out.println("Hello World!");
+        systemController system = new systemController();
+        systemController.systemStart(system.inFrame);
 
 
-
-        //Display display = new Display();
 
     }
 }

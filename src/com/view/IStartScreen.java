@@ -2,11 +2,7 @@ package com.view;
 
 import com.model.Stock;
 import com.controller.systemController;
-import com.view.IEditStock;
 
-import java.util.*;
-import java.text.DecimalFormat;
-import java.io.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,28 +10,29 @@ import java.util.ArrayList;
 
 public class IStartScreen extends JFrame{
 
-    private JPanel mainPanel;
+    public JPanel mainPanel;
     private JButton btnStaff;
+    public JList lstGoods;
     public JOptionPane forlogin;
 
 
-    public String filepath = "resources\\StockList.txt";
+    public String filepath = "resources\\Stock_List.txt";
     public String separator = "\\|";
     private final ArrayList<Stock> stockFile = new ArrayList<>();
 
-    public IStartScreen(){
+    public IStartScreen(JFrame startFrame, JFrame next){
 
         btnStaff.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                staffScreen();
+                staffScreen(startFrame, lstGoods);
             }
         });
 
     }
 
-    public void staffScreen(){
+    public void staffScreen(JFrame startFrame, JList lstGoods){
 
         JFrame forLogin = new JFrame();
         forLogin.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -58,7 +55,7 @@ public class IStartScreen extends JFrame{
                 forlogin.showMessageDialog(forLogin, "Staff Login Correct.", "Staff Login",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                systemController.adminStart();
+                systemController.adminStart(startFrame, lstGoods);
             }
             else{
                 forlogin.showMessageDialog(forLogin, "Staff Login failed.", "Staff Login",

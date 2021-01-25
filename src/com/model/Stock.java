@@ -14,9 +14,9 @@ public class Stock {
     private int stockLevel;
     public String[] tempArray;
 
-    public String filepath = "resources\\StockList.txt";
+    public String filepath = "resources\\Stock_List.txt";
     public String separator = "\\|";
-    private final ArrayList<Stock> stockFile = new ArrayList<>();
+    public final ArrayList<Stock> stockFile = new ArrayList<>();
 
 
     //getters and setters.
@@ -58,6 +58,10 @@ public class Stock {
         this.stockLevel = inStockLevel;
     }
 
+    public String[] getStockFile(){
+        return tempArray;
+    }
+
 
     //load stock_List from resources folder
     public void loadStock(){
@@ -93,7 +97,7 @@ public class Stock {
             while (itr.hasNext()){
                 Stock stock = (Stock) itr.next();
                 System.out.println("Code: " + stock.getCode() + " Product: " + stock.getProduct()
-                + " Cost: " + stock.getCost() + "Stock Level: " + stock.getStockLevel());
+                + " Cost: " + stock.getCost() + " Stock Level: " + stock.getStockLevel());
             }
 
         } catch (Exception e) {
