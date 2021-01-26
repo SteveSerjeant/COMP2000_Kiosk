@@ -9,8 +9,10 @@ import com.model.*;
 public class systemController {
 
     public JFrame inFrame;
+    public JFrame mainPanel;
 
     public static void systemStart(JFrame inFrame){
+
 
         JFrame startFrame = new JFrame("Start Screen");
         startFrame.setContentPane(new IStartScreen(startFrame, inFrame).mainPanel);
@@ -26,9 +28,10 @@ public class systemController {
 
     public static void adminStart(JFrame startFrame, JList stockList){
 
+
         JFrame staff = new JFrame("Staff");
         staff.setContentPane(new IEditStock(staff, stockList).mainPanel);
-        staff.setSize(600, 600);
+        staff.setSize(800, 750);
         staff.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         staff.setVisible(true);
         startFrame.setVisible(false);

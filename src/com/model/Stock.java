@@ -22,9 +22,11 @@ public class Stock {
     //getters and setters.
 
     public int getCode(){
+
         return this.code;
     }
     public void setCode(int inCode){
+
         this.code = inCode;
     }
 
@@ -59,6 +61,7 @@ public class Stock {
     }
 
     public String[] getStockFile(){
+
         return tempArray;
     }
 
@@ -103,6 +106,45 @@ public class Stock {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void addNewStock(Stock newStock){
+
+        stockFile.add(newStock);
+
+    }
+
+    public Stock getSelectedStock(int selectedIndex){
+
+        //return null if selectedIndex is outside range
+        if(selectedIndex >= stockFile.size())
+        {
+            return null;
+        }
+        return stockFile.get(selectedIndex);
+
+    }
+
+    public String displayDetails(){
+
+        String details = new String(product + cost);
+        return details;
+
+    }
+
+    public String forBasket(){
+
+        String forBasket = new String(product + cost);
+        return forBasket;
+    }
+
+//    public void setNewCost(String inCost){
+//        this.newCost = inCost;
+//    }
+
+    public void deleteStock(Stock delStock){
+
+        stockFile.remove(delStock);
     }
 
 }
