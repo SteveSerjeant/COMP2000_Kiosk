@@ -1,6 +1,7 @@
 package com.view;
 
 import com.model.Stock;
+import com.view.IEditStock;
 import com.controller.systemController;
 
 import javax.swing.*;
@@ -8,23 +9,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.*;
+import java.text.DecimalFormat;
 
 public class IStartScreen extends JFrame{
 
     public JPanel mainPanel;
-    private JTextField txtStockCode;
+    private JPanel rightPanel;
+    private JPanel leftPanel;
+    private JButton btnCheckout;
+    private JTextField txtInCode;
     private JButton btnStaff;
     private JLabel lblRunningTotal;
     public JList lstGoods;
     public JList lstForBasket;
+    private JLabel lblName;
+    private JButton btnAdd;
+    private JLabel lblHint;
+    private JButton btnBasket;
 
     public Float runningTotal = 0.0f;
+    //public String runningTotal;
+
     public JOptionPane forlogin;
 
 
     File listOfStock  = new File("resources\\StockList.txt");
-    public String separator = "\\|";
-    private final ArrayList<Stock> stockFile = new ArrayList<>();
+    //public String separator = "\\|";
+    private ArrayList<Stock> stockFile = new ArrayList<>();
 
     public IStartScreen(JFrame startFrame, JFrame next){
 
@@ -37,6 +49,15 @@ public class IStartScreen extends JFrame{
                 staffScreen(startFrame, lstGoods);
             }
         });
+
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                getStockCode();
+            }
+        });
+
 
     }
 
@@ -81,26 +102,32 @@ public class IStartScreen extends JFrame{
 
     public void getStockCode(){
 
-        DefaultListModel modelBasket = (DefaultListModel) lstGoods.getModel();
+        DefaultListModel ModelBasket = (DefaultListModel) lstForBasket.getModel();
 
         String separator = "|";
 
         String matchedCode;
 
-        try {
+        try
+        {
             //method to read file
             BufferedReader reader = new BufferedReader(new FileReader(listOfStock));
 
+            //String currentLine;
             String currentLine = null;
 
-            while ((currentLine = reader.readLine()) != null){
+            while ((currentLine = reader.readLine()) != null)
+            {
 
                 String[] storedLine = currentLine.split(separator);
+                //String[] attribute = CLine.split(separator);
+                System.out.println(storedLine);
 
-                if(storedLine[0].equals(txtStockCode.getText())){
+                if(storedLine[0].equals(txtInCode.getText()))
+                {
                     matchedCode = currentLine;
 
-                    modelBasket.addElement(matchedCode);
+                    ModelBasket.addElement(matchedCode);
 
                     modifyBasketFigures(storedLine);
                 }
@@ -108,20 +135,28 @@ public class IStartScreen extends JFrame{
             reader.close();
         }
 
-        catch (Exception e) {
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public void modifyBasketFigures(String[] itemCost){
+    public void modifyBasketFigures(String[] inArray){
+        //public void modifyBasketFigures(String[] itemCost){
+
+
 
         String tempCost;
-        tempCost = itemCost[2];
+        tempCost = inArray[2];
+        System.out.println(tempCost);
+        tempCost= tempCost.replace("£","");
 
-    runningTotal = runningTotal + Float.parseFloat(tempCost);
+        runningTotal = runningTotal + Float.parseFloat(tempCost);
 
-    lblRunningTotal.setText("£" + String.format("%.2f", runningTotal));
-
+        //lblRunningTotal.setText("£" + String.format("%.2f", runningTotal));
+        lblRunningTotal.setText("£" + String.format("%0.2f", runningTotal));
 
     }
 }

@@ -8,24 +8,24 @@ import java.io.FileNotFoundException;
 
 public class Stock {
 
-    private int code;
+    private String code;
     private String product;
-    private float cost;
-    private int stockLevel;
+    private String cost;
+    private String stockLevel;
     public String[] tempArray;
 
-    public String filepath = "resources\\Stock_List.txt";
+    public String filepath = "resources\\StockList.txt";
     public String separator = "\\|";
     public final ArrayList<Stock> stockFile = new ArrayList<>();
 
 
     //getters and setters.
 
-    public int getCode(){
+    public String getCode(){
 
         return this.code;
     }
-    public void setCode(int inCode){
+    public void setCode(String inCode){
 
         this.code = inCode;
     }
@@ -41,21 +41,21 @@ public class Stock {
     }
 
 
-    public float getCost(){
+    public String getCost(){
 
         return this.cost;
     }
-    public void setCost(float inCost){
+    public void setCost(String inCost){
 
         this.cost = inCost;
     }
 
 
-    public  int getStockLevel(){
+    public String getStockLevel(){
 
         return this.stockLevel;
     }
-    public  void setStockLevel(int inStockLevel){
+    public void setStockLevel(String inStockLevel){
 
         this.stockLevel = inStockLevel;
     }
@@ -80,13 +80,11 @@ public class Stock {
                 System.out.println(stockData[0]);
 
                 Stock stock = new Stock();
-                int tempCode = Integer.parseInt(stockData[0]);
-                stock.setCode(tempCode);
+                stock.setCode(stockData[0]);
                 stock.setProduct(stockData[1]);
-                float tempCost = Float.parseFloat(stockData[2]);
-                stock.setCost(tempCost);
-                int tempLevel = Integer.parseInt(stockData[3]);
-                stock.setStockLevel(tempLevel);
+                stock.setCost(stockData[2]);
+                stock.setStockLevel(stockData[3]);
+
 
                 stockFile.add(stock);
 
@@ -114,14 +112,14 @@ public class Stock {
 
     }
 
-    public Stock getSelectedStock(int selectedIndex){
+    public Stock getSelectedStock(int inSelectedIndex){
 
         //return null if selectedIndex is outside range
-        if(selectedIndex >= stockFile.size())
+        if(inSelectedIndex >= stockFile.size())
         {
             return null;
         }
-        return stockFile.get(selectedIndex);
+        return stockFile.get(inSelectedIndex);
 
     }
 

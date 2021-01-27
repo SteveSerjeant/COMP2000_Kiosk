@@ -1,0 +1,7 @@
+8|Yoghurt|£0.50|20
+2|Coffee|£3.00|10
+3|Milk|£1.10|20
+4|Sugar|£0.95|25
+5|Teabags|£1.25|30
+6|Branflakes|£2.25|20
+7|Hot Chocolate|£2.25|20

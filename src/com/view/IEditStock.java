@@ -39,7 +39,30 @@ public class IEditStock {
         btnAddStock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 addNewStock();
+            }
+        });
+
+        btnEditStock.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editStockLine();
+            }
+        });
+
+        btnDeleteStock.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteStockLine();
+            }
+        });
+
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                systemController.systemStart(frame);
             }
         });
 
@@ -98,17 +121,85 @@ public class IEditStock {
 
         newStock.loadStock();
 
-        newStock.setCode(Integer.parseInt(inNewCode) );
+        newStock.setCode(inNewCode);
         newStock.setProduct(inNewProduct);
-        newStock.setCost(Float.parseFloat(inNewCost));
-        newStock.setStockLevel(Integer.parseInt(inNewQty));
+        newStock.setCost(inNewCost);
+        newStock.setStockLevel(inNewQty);
 
         newStock.addNewStock(newStock);
+
+        updateStockList(newStock);
+
+    }
+
+    public void editStockLine(){
+
+        //reuses popUp box and fields as addNewStock
+        int selection;
+        JTextField txtNewCode =  new JTextField();
+        JTextField txtNewProduct = new JTextField();
+        JTextField txtNewCost = new JTextField();
+        JTextField txtNewQty = new JTextField();
+
+        //get index selected by user
+        selection = lstGoods.getSelectedIndex();
+
+        //temporary Stock Object
+        Stock tempObject = new Stock();
+
+        tempObject.loadStock();
+
+
+        Stock tempStock = tempObject.getSelectedStock(selection);
+
+
+
+        Object[] output = {
+                "Code: ", txtNewCode, "Product: ", txtNewProduct,
+                "Cost: ", txtNewCost, "Quantity: ", txtNewQty
+        };
+        int number = popUpOption.showConfirmDialog(popUpBox,output,
+                "Editing Stock item.",JOptionPane.INFORMATION_MESSAGE);
+
+        //dealing with inputs
+        if(number == popUpOption.OK_OPTION){
+
+            //and fields not empty
+            if(txtNewCode != null && txtNewProduct != null
+                    && txtNewCost != null && txtNewQty != null){
+
+                editStockItem(txtNewCode.getText(), txtNewProduct.getText(),
+                        txtNewCost.getText(), txtNewQty.getText());
+
+                //popup if successsful
+                popUpOption.showMessageDialog(popUpBox, "Stock Edit Successful.",
+                        "NOTICE",JOptionPane.INFORMATION_MESSAGE);
+
+                loadStockData();
+
+                //console output for successful edit
+                System.out.println("Edit product successful.");
+            }
+
+            else {
+                popUpOption.showMessageDialog(popUpBox, "All Fields Required.",
+                        "WARNING",JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        }
+        else {
+            popUpOption.showMessageDialog(popUpBox, "Stock Edit Failed.",
+                    "WARNING",JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
+
 
     }
 
     public void editStockItem(String inNewCode, String inNewProduct,
                               String inNewCost, String inNewQty){
+
 
         //create temp Object
         Stock tempStock = new Stock();
@@ -118,12 +209,15 @@ public class IEditStock {
         //retrieving elected stock item
         Stock forEdit = tempStock.getSelectedStock(lstGoods.getSelectedIndex());
 
-        forEdit.setCode(Integer.parseInt(inNewCode));
-        forEdit.setProduct(inNewProduct);
-        forEdit.setCost(Float.parseFloat(inNewCost));
-        forEdit.setStockLevel(Integer.parseInt(inNewQty));
 
-        updateStockList(forEdit);
+
+        forEdit.setCode(inNewCode);
+        forEdit.setProduct(inNewProduct);
+        forEdit.setCost(inNewCost);
+        forEdit.setStockLevel(inNewQty);
+
+        //updateStockList(forEdit);
+        updateStockList(tempStock);
 
 
 
@@ -145,14 +239,14 @@ public class IEditStock {
         Stock stockLine = tempObject.getSelectedStock(selectedIndex);
 
         //store prior to display
-        int tcode = tempObject.getCode();
-        String tprod = tempObject.getProduct();
-        float tcost = tempObject.getCost();
-        int tqty = tempObject.getStockLevel();
+        String tcode = stockLine.getCode();
+        String tprod = stockLine.getProduct();
+        String tcost = stockLine.getCost();
+        String tqty = stockLine.getStockLevel();
 
         Object[] tempMessage = {
                 "Please confirm you wish to PERMANENTLY delete this product.",
-                "Code: " + tcode, "Product: " + tprod +
+                "Code: " + tcode, "Product: " + tprod,
                 "Cost: " + tcost, "Stock Level: " + tqty
 
         };
@@ -230,6 +324,8 @@ public class IEditStock {
 
             for (int i = 0; i < tempStock.size(); i++){
 
+                String tempCode;
+                String tempCost;
                 String tempList = "";
                 String tempProduct;
 
@@ -239,17 +335,17 @@ public class IEditStock {
                     tempList = "\n";
 
                 }
-                String tempCode = tempStock.get(i).toString();
+                tempCode = tempStock.get(i).getCode();
                 //add to array with separator
                 tempList += tempCode + "|";
 
                 tempProduct = tempStock.get(i).getProduct();
                 tempList += tempProduct + "|";
 
-                String tempCost = tempStock.get(i).toString();
+                tempCost = tempStock.get(i).getCost();
                 tempList += tempCost + "|";
 
-                String tempQty = tempStock.get(i).toString();
+                String tempQty = tempStock.get(i).getStockLevel();
                 tempList += tempQty;
 
                 writer.write(tempList);
