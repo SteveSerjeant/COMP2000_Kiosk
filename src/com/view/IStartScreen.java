@@ -23,12 +23,13 @@ public class IStartScreen extends JFrame{
     private JLabel lblRunningTotal;
     public JList lstGoods;
     public JList lstForBasket;
+    private float runningTotal;
     private JLabel lblName;
     private JButton btnAdd;
     private JLabel lblHint;
+    private JButton btnClose;
     private JButton btnBasket;
 
-    public Float runningTotal = 0.0f;
     //public String runningTotal;
 
     public JOptionPane forlogin;
@@ -63,6 +64,14 @@ public class IStartScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 systemController.checkoutStart(lstForBasket, runningTotal, startFrame, next);
+                startFrame.setVisible(false);
+            }
+        });
+
+        btnClose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
 
@@ -124,15 +133,13 @@ public class IStartScreen extends JFrame{
             //String currentLine;
             String currentLine = null;
 
-            while ((currentLine = reader.readLine()) != null)
-            {
+            while ((currentLine = reader.readLine()) != null) {
 
                 String[] storedLine = currentLine.split(separator);
                 //String[] attribute = CLine.split(separator);
                 System.out.println(storedLine);
 
-                if(storedLine[0].equals(txtInCode.getText()))
-                {
+                if(storedLine[0].equals(txtInCode.getText())) {
                     matchedCode = currentLine;
 
                     ModelBasket.addElement(matchedCode);

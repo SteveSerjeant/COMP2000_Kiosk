@@ -91,15 +91,17 @@ public class Stock {
             }
             scanner.close();
             System.out.println("File successfully loaded.");
-            System.out.println(stockFile.size());
 
-            //code to output stockFile to console
-            Iterator itr = stockFile.iterator();
-            while (itr.hasNext()){
-                Stock stock = (Stock) itr.next();
-                System.out.println("Code: " + stock.getCode() + " Product: " + stock.getProduct()
-                + " Cost: " + stock.getCost() + " Stock Level: " + stock.getStockLevel());
-            }
+            //Test code from development
+//            System.out.println(stockFile.size());
+//
+//            //code to output stockFile to console
+//            Iterator itr = stockFile.iterator();
+//            while (itr.hasNext()){
+//                Stock stock = (Stock) itr.next();
+//                System.out.println("Code: " + stock.getCode() + " Product: " + stock.getProduct()
+//                + " Cost: " + stock.getCost() + " Stock Level: " + stock.getStockLevel());
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
