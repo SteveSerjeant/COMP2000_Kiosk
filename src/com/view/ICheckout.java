@@ -116,7 +116,7 @@ public class ICheckout {
                     "\n" + " ******** THANK YOU *********";
             lblAmount.setText("");
             lstFromBasket.setVisible(false);
-            updateStockFile();
+            //updateStockFile();
         }
         else{
             checkPopup.showMessageDialog(popUp, "Insufficient cash, please enter more.");
@@ -151,7 +151,7 @@ public class ICheckout {
                     " ******** THANK YOU *********";
             lblAmount.setText("");
             lstFromBasket.setVisible(false);
-            updateStockFile()
+            //updateStockFile();
         }
         else {
             checkPopup.showMessageDialog(popUpCard,
@@ -170,39 +170,5 @@ public class ICheckout {
 
     }
 
-    public void updateStockFile(){
-        Stock stockArray = new Stock();
 
-        stockArray.loadStock();
-
-        //create model with items from checkout.
-        DefaultListModel lstPurchased = (DefaultListModel) lstForBasket.getModel();
-
-        //number of items in basket.
-        int itemsInBasket = lstPurchased.size();
-
-        //loop through basket
-        for (int i = 0; i < itemsInBasket; i++){
-
-            String basketItem = (String) lstPurchased.getElementAt(i);
-
-            String[] tempArray = basketItem.split(separator);
-
-            String stockCode = tempArray[0];
-
-            for (int j = 0; j < stockArray.stockFile.size(); j++){
-
-                Stock currentStock = stockArray.stockFile.get(j);
-
-                //store current code.
-                String tempCode = currentStock.getCode();
-
-                //if matches item purchased
-                if (tempCode.equals(stockCode)){
-                    //decrease stock quantity
-                    stockArray.stockFile.get(j).setStockLevel(currentStock.getStockLevel() - 1);
-                }
-            }
-;        }
-    }
 }

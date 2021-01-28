@@ -1,10 +1,8 @@
 package com.model;
 
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileNotFoundException;
 
 public class Stock {
 
