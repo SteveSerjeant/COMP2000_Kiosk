@@ -58,6 +58,14 @@ public class IStartScreen extends JFrame{
             }
         });
 
+        btnCheckout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                systemController.checkoutStart(lstForBasket, runningTotal, startFrame, next);
+            }
+        });
+
 
     }
 
@@ -104,7 +112,7 @@ public class IStartScreen extends JFrame{
 
         DefaultListModel ModelBasket = (DefaultListModel) lstForBasket.getModel();
 
-        String separator = "|";
+        String separator = "\\|";
 
         String matchedCode;
 
@@ -130,6 +138,7 @@ public class IStartScreen extends JFrame{
                     ModelBasket.addElement(matchedCode);
 
                     modifyBasketFigures(storedLine);
+                    txtInCode.setText("");
                 }
             }
             reader.close();
@@ -156,7 +165,7 @@ public class IStartScreen extends JFrame{
         runningTotal = runningTotal + Float.parseFloat(tempCost);
 
         //lblRunningTotal.setText("£" + String.format("%.2f", runningTotal));
-        lblRunningTotal.setText("£" + String.format("%0.2f", runningTotal));
+        lblRunningTotal.setText("Total: £" + String.format("%.2f", runningTotal));
 
     }
 }

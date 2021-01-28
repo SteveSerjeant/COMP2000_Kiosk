@@ -37,4 +37,15 @@ public class systemController {
         startFrame.setVisible(false);
 
     }
+
+    public static void checkoutStart(JList shopList, Float tempTotal,  JFrame startFrame, JFrame checkout){
+
+
+        checkout = new JFrame("CHECKOUT ");
+        checkout.setContentPane(new ICheckout(shopList, tempTotal, startFrame,checkout).mainPanel);
+        checkout.setSize(400, 500);
+        checkout.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        checkout.setVisible(true);
+
+    }
 }
