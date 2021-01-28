@@ -5,3 +5,4 @@
 5|Teabags|£1.25|30
 6|Branflakes|£2.25|20
 7|Hot Chocolate|£2.25|20
+8|Trifle|£2.50|10

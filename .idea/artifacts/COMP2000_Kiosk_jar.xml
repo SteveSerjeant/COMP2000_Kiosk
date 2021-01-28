@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="COMP2000_Kiosk:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/COMP2000_Kiosk_jar</output-path>
+    <root id="archive" name="COMP2000_Kiosk.jar">
+      <element id="module-output" name="COMP2000_Kiosk" />
+    </root>
+  </artifact>
+</component>

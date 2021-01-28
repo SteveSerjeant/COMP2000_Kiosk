@@ -44,12 +44,14 @@ public class ICheckout {
         btnCash.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 payWithCash();
             }
         });
         btnCard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 payWithCard();
             }
         });
@@ -57,6 +59,7 @@ public class ICheckout {
         btnReceipt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 outputReceipt();
             }
         });
@@ -94,7 +97,8 @@ public class ICheckout {
         popUp.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         //temporary float for cash amounts entered.
-        cashEntered = Float.parseFloat(checkPopup.showInputDialog(popUp, "Please enter cash amount tendered."));
+        cashEntered = Float.parseFloat(checkPopup.showInputDialog(popUp,
+                "Please enter cash amount tendered."));
 
         //store transaction total from lblAmount
         String transTotal = lblAmount.getText();
@@ -165,7 +169,8 @@ public class ICheckout {
         JFrame popReceipt = new JFrame();
         popReceipt.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        checkPopup.showMessageDialog(popReceipt, forReceipt, "RECEIPT", JOptionPane.INFORMATION_MESSAGE);
+        checkPopup.showMessageDialog(popReceipt, forReceipt,
+                "RECEIPT", JOptionPane.INFORMATION_MESSAGE);
 
 
     }

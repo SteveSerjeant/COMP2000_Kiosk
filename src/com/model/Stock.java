@@ -123,22 +123,7 @@ public class Stock {
 
     }
 
-    public String displayDetails(){
 
-        String details = new String(product + cost);
-        return details;
-
-    }
-
-    public String forBasket(){
-
-        String forBasket = new String(product + cost);
-        return forBasket;
-    }
-
-//    public void setNewCost(String inCost){
-//        this.newCost = inCost;
-//    }
 
     public void deleteStock(Stock delStock){
 
